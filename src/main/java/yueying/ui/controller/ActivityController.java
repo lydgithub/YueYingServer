@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import yueying.ui.helper.ActivityHelper;
 import yueying.ui.model.ActivityListModel;
 import yueying.ui.model.ActivityModel;
+import yueying.ui.model.FilmModel;
+import yueying.ui.model.LocationModel;
 import yueying.ui.model.SaveActivityModel;
 @Controller
 @RequestMapping("/activity")
@@ -51,12 +53,23 @@ public class ActivityController {
 	@RequestMapping(value = "/putAct/{activityId}", method = RequestMethod.POST)
 	@ResponseBody
 	public SaveActivityModel post(HttpServletRequest request,@PathVariable UUID activityId,
-
-			
 			
 			ActivityModel activityModel){
 		Integer userId=(Integer) request.getSession().getAttribute("userid");
 		return this.getActivityHelper().saveActivity(activityId,activityModel,userId);
 		
 	}
+	@RequestMapping(value = "/getFilm/", method = RequestMethod.POST)
+	@ResponseBody
+	public FilmModel postLocation(@RequestBody LocationModel locationModel ) {
+		
+		//System.out.println(locationModel.getxPoint());
+		//System.out.println(locationModel.getyPoint());
+		//return am.getXpoint() + am.getYpoint();
+		FilmModel filmModel=new FilmModel();
+		filmModel.setRes(0);
+		return filmModel;
+		
+	}
+
 }
