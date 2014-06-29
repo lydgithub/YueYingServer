@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver </property>
+ 		<property name="hibernate.connection.url"> jdbc:mysql://localhost:3306/yueyingtest
+		</property>
+		<property name="hibernate.connection.username">root </property>
+		<property name="hibernate.connection.password">root </property>
+		<property name="hibernate.connection.pool.size">20 </property>
+		<property name="hibernate.show_sql">false </property>
+		<property name="format_sql">false</property>
+		<property name="Connection.useUnicode">true </property>
+		<property name="connection.characterEncoding">utf-8 </property>
+		<property name="hibernate.connection.CharSet">utf8</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect </property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+<!-- 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>    -->
+		<property name="c3p0.min_size">5</property>   
+		<property name="c3p0.max_size">30</property>   
+		<property name="c3p0.time_out">1800</property> <!-- seconds --><!-- default: 0 -->   
+		<property name="c3p0.max_statement">50</property> <!-- default: 0 -->   
+		<property name="c3p0.acquire_increment">1</property> <!-- default: 1 -->   
+		<property name="c3p0.idle_test_period">1200</property> <!-- seconds --><!-- default: 0 -->   
+		<property name="c3p0.validate">true</property> 
+
+		<mapping class="yueying.dto.entity.User" />
+
+	</session-factory>
+</hibernate-configuration>
