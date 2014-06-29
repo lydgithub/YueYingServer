@@ -14,10 +14,10 @@ import com.mysql.jdbc.Blob;
 @XmlRootElement(name = "user")
 public class UserModel {
 
-	private int id;
+	private long id;
 	private String name;
 	private String password;
-	private int gentle;
+	private byte gentle;
 	private Date birthday;
 	private float height;
 	private float weight;
@@ -25,17 +25,18 @@ public class UserModel {
 	private int provinceId;
 	private int cityId;
 	private String job;
-	private int marryed;
+	private byte marryed;
 	private String tag;
 	private String signature;
+	private String photoUrl;
 	//private Blob photo;
 	
 	@XmlElement
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -58,11 +59,11 @@ public class UserModel {
 	}
 	
 	@XmlElement
-	public int getGentle() {
+	public byte getGentle() {
 		return gentle;
 	}
 
-	public void setGentle(int gentle) {
+	public void setGentle(byte gentle) {
 		this.gentle = gentle;
 	}
 
@@ -130,11 +131,11 @@ public class UserModel {
 	}
 
 	@XmlElement
-	public int getMarryed() {
+	public byte getMarryed() {
 		return marryed;
 	}
 
-	public void setMarryed(int marryed) {
+	public void setMarryed(byte marryed) {
 		this.marryed = marryed;
 	}
 
@@ -155,6 +156,8 @@ public class UserModel {
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
+	
+	
 
 	/*
 	@Column(name = "user_photo")

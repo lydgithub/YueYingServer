@@ -2,6 +2,7 @@ package yueying.dto.entity;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,10 +19,10 @@ import com.mysql.jdbc.Blob;
 @Entity
 @Table(name = "user")
 public class User {
-	private int id;
+	private long id;
 	private String name;
 	private String password;
-	private int gentle;
+	private byte gentle;
 	private Date birthday;
 	private float height;
 	private float weight;
@@ -29,19 +30,20 @@ public class User {
 	private int provinceId;
 	private int cityId;
 	private String job;
-	private int marryed;
+	private byte marryed;
 	private String tag;
 	private String signature;
+	private String photoUrl;
 	//private Blob photo;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -64,11 +66,11 @@ public class User {
 	}
 	
 	@Column(name = "gentle")
-	public int getGentle() {
+	public byte getGentle() {
 		return gentle;
 	}
 
-	public void setGentle(int gentle) {
+	public void setGentle(byte gentle) {
 		this.gentle = gentle;
 	}
 
@@ -136,11 +138,11 @@ public class User {
 	}
 
 	@Column(name = "ismarry")
-	public int getMarryed() {
+	public byte getMarryed() {
 		return marryed;
 	}
 
-	public void setMarryed(int marryed) {
+	public void setMarryed(byte marryed) {
 		this.marryed = marryed;
 	}
 
@@ -162,16 +164,16 @@ public class User {
 		this.signature = signature;
 	}
 
-	/*
+	
 	@Column(name = "user_photo")
-	public Blob getPhoto() {
-		return photo;
+	public String getPhoto() {
+		return photoUrl;
 	}
 
-	public void setPhoto(Blob photo) {
-		this.photo = photo;
+	public void setPhoto(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
-	*/
+	
 
 	
 	//private Set<Activity> promotedActivities;

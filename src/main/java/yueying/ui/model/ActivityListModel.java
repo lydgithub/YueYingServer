@@ -1,13 +1,19 @@
 package yueying.ui.model;
 
+
+
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonValue;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
-@JsonRootName(value = "mainuser")
+@JsonRootName(value = "ActivityList")
 public class ActivityListModel {
+	
 		private float point;
 		@JsonValue
 		public float getPoint() {
@@ -18,7 +24,7 @@ public class ActivityListModel {
 			this.point = point;
 		}
 		
-		
-	
 
 }
+
+
