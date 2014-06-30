@@ -2,12 +2,9 @@ package yueying.ui.helper;
 
 import java.util.UUID;
 
-import org.apache.hadoop.hive.ql.parse.HiveParser.booleanValue_return;
-import org.jboss.netty.channel.SucceededChannelFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import yueying.dto.entity.Activity;
 import yueying.service.ActivityService;
 import yueying.ui.model.ActivityModel;
 import yueying.ui.model.SaveActivityModel;

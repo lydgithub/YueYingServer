@@ -3,7 +3,6 @@ package yueying.service;
 
 
 
-import java.util.HashSet;
 import java.util.UUID;
 
 import org.hibernate.Session;
@@ -39,10 +38,10 @@ public class ActivityService {
 				activity.setId(activityModel.getId());
 				activity.setFilmId(activityModel.getFilmId());
 				activity.setCinemaId(activityModel.getCinemaId());
-				activity.setGentle(activityModel.getGentle());
+				//activity.setGentle(activityModel.getGentle());
 				activity.setPay(activityModel.getPay());
-				activity.setTime(activityModel.getTime());
-				activity.setUser(user);
+				//activity.setTime(activityModel.getTime());
+				//activity.setUser(user);
 				session.save(activity);
 				
 			} 
@@ -50,9 +49,9 @@ public class ActivityService {
 				activity.setId(activityModel.getId());
 				activity.setFilmId(activityModel.getFilmId());
 				activity.setCinemaId(activityModel.getCinemaId());
-				activity.setGentle(activityModel.getGentle());
+				//activity.setGentle(activityModel.getGentle());
 				activity.setPay(activityModel.getPay());
-				activity.setTime(activityModel.getTime());
+				//activity.setTime(activityModel.getTime());
 			}
 
 			

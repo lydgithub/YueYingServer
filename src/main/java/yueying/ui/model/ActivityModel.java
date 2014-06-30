@@ -4,8 +4,8 @@ import java.util.UUID;
 
 public class ActivityModel {
 	private UUID id;
-	private UUID filmId;
-	private UUID cinemaId;
+	private String filmId;
+	private String cinemaId;
 	private int userId;
 	private String gentle;
 	private String pay;
@@ -20,16 +20,16 @@ public class ActivityModel {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public UUID getFilmId() {
+	public String getFilmId() {
 		return filmId;
 	}
-	public void setFilmId(UUID filmId) {
+	public void setFilmId(String filmId) {
 		this.filmId = filmId;
 	}
-	public UUID getCinemaId() {
+	public String getCinemaId() {
 		return cinemaId;
 	}
-	public void setCinemaId(UUID cinemaId) {
+	public void setCinemaId(String cinemaId) {
 		this.cinemaId = cinemaId;
 	}
 	public String getGentle() {
