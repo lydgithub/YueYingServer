@@ -1,0 +1,8 @@
+/WebContent
+.project
+.classpath
+.DS_Store
+.settings
+*.class
+*.apk
+*.jar

@@ -1,8 +1,10 @@
 package yueying.ui.helper;
 
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.UUID;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import yueying.service.ActivityService;
 import yueying.ui.model.ActivityModel;
+import yueying.ui.model.FilmBriefListModel;
+import yueying.ui.model.FilmBriefModel;
 import yueying.ui.model.FilmModel;
 import yueying.ui.model.LocationModel;
 import yueying.ui.model.SaveActivityModel;
@@ -72,8 +76,7 @@ public class ActivityHelper {
 		return saveActivityModel;
 	}
 
-	public FilmModel getFilm(LocationModel locationModel) {
-		System.out.println("success");
+	public FilmBriefListModel getFilm(LocationModel locationModel) {
 		String cityName = locationModel.getPlace();//参数
 		System.out.println(cityName);
 		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_FILM_URL);//url为请求的api接口地址
@@ -88,12 +91,26 @@ public class ActivityHelper {
 		//错误码判断
 		if(code.equals("0")){
 			//根据需要取得数据
-			JSONObject jsonObject =  (JSONObject)object.getJSONArray("result").get(0);
-			//System.out.println(jsonObject.getJSONObject("citynow").get("AQI"));
+			JSONArray jsonArray =  (JSONArray)object.getJSONArray("result");
+			FilmBriefListModel filmBriefListModel=new FilmBriefListModel();
+			filmBriefListModel.setFilmBriefModels(new ArrayList<FilmBriefModel>());
+			for(int i=0;i<jsonArray.size();i++){
+				FilmBriefModel filmBriefModel=new FilmBriefModel();
+				JSONObject jsonObject=jsonArray.getJSONObject(i);
+				String idString=jsonObject.getString("movieId");
+				filmBriefModel.setId(idString);
+				String name=jsonObject.getString("movieName");
+				filmBriefModel.setName(name);
+				String picUrl=jsonObject.getString("pic_url");
+				filmBriefModel.setpicUrl(picUrl);
+				filmBriefListModel.getFilmBriefModels().add(filmBriefModel);
+			}
+			return filmBriefListModel;
 		}else{
 			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
+			return null;
 		}
-		return null;
+		
 	}
 
 
