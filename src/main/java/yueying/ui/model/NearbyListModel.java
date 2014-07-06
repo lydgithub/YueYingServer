@@ -2,15 +2,19 @@ package yueying.ui.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 public class NearbyListModel {
-	private List<NearbyActivityModel> nearbylist;
+	private List<ActivityInfoModel> nearbylist;
 
-	public List<NearbyActivityModel> getNearbylist() {
+	
+	public List<ActivityInfoModel> getNearbylist() {
 		return nearbylist;
 	}
 
-	public void setNearbylist(List<NearbyActivityModel> nearbylist) {
+	public void setNearbylist(List<ActivityInfoModel> nearbylist) {
 		this.nearbylist = nearbylist;
 	}
 

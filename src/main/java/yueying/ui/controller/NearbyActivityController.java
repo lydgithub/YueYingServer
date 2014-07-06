@@ -1,7 +1,6 @@
 package yueying.ui.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,10 +27,11 @@ public class NearbyActivityController {
 		this.nearbyActivityHelper = nearbyActivityHelper;
 	}
 	
-	@RequestMapping(value = "/getActlist/{xPoint}/{yPoint}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getActlist/{xPoint}/{yPoint}/{listid}", method = RequestMethod.GET)
 	@ResponseBody
-	public NearbyListModel get(@PathVariable float xPoint,@PathVariable float yPoint,HttpServletRequest request){
-		return this.getNearbyActivityHelper().getNearbyActivity(xPoint,yPoint);
+	public NearbyListModel get(@PathVariable float xPoint,@PathVariable float yPoint,@PathVariable int listid,HttpServletRequest request){
+		System.out.println("enter!");
+		return this.getNearbyActivityHelper().getNearbyActivity(xPoint,yPoint,listid);
 	}
 
 	

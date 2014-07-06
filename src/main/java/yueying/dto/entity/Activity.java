@@ -1,12 +1,22 @@
 package yueying.dto.entity;
 
+import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
+import org.apache.hadoop.hive.ql.parse.HiveParser.stringLiteralSequence_return;
 @Entity
 @Table(name = "activity")
 public class Activity{
@@ -19,11 +29,11 @@ public class Activity{
 	 
 	private String cinemaId;
 	private String filmId;
-	private Time starttime;
+	private Timestamp starttime;
 	private float ticketPrice;
 	
 	private long launchUserId;
-	private Time launchTime;
+	private Timestamp launchTime;
 	private float launchLat;
 	private float launchlog;
 	
@@ -87,10 +97,10 @@ public class Activity{
 	}
 	
 	@Column(name = "start_time")
-	public Time getStarttime() {
+	public Timestamp getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Time starttime) {
+	public void setStarttime(Timestamp starttime) {
 		this.starttime = starttime;
 	}
 	
@@ -111,10 +121,10 @@ public class Activity{
 	}
 	
 	@Column(name = "launch_time")
-	public Time getLaunchTime() {
+	public Timestamp getLaunchTime() {
 		return launchTime;
 	}
-	public void setLaunchTime(Time launchTime) {
+	public void setLaunchTime(Timestamp launchTime) {
 		this.launchTime = launchTime;
 	}
 	
@@ -140,10 +150,6 @@ public class Activity{
 	}
 	public void setPartnerUserId(long partnerUserId) {
 		this.partnerUserId = partnerUserId;
-	}
-	public void setPay(String pay) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 

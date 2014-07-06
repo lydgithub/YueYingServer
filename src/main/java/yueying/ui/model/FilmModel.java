@@ -1,6 +1,7 @@
 package yueying.ui.model;
 
 import java.sql.Time;
+import java.util.Date;
 
 public class FilmModel {
 	private String id;
@@ -8,7 +9,7 @@ public class FilmModel {
 	private String type;
 	private String country;
 	private int playMinutes;
-	private Time showTime; 
+	private Date showTime; 
 	private float score;
 	private String photoUrl;
 	
@@ -42,10 +43,10 @@ public class FilmModel {
 	public void setPlayMinutes(int playMinutes) {
 		this.playMinutes = playMinutes;
 	}
-	public Time getShowTime() {
+	public Date getShowTime() {
 		return showTime;
 	}
-	public void setShowTime(Time showTime) {
+	public void setShowTime(Date showTime) {
 		this.showTime = showTime;
 	}
 	public float getScore() {
