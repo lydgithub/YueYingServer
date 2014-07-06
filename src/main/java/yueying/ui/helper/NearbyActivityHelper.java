@@ -104,7 +104,11 @@ public class NearbyActivityHelper {
 		//错误码判断
 		if(code.equals("0")){
 			//根据需要取得数据
-			JSONObject jsonObject =  (JSONObject)object.getJSONArray("result").get(0);
+			FilmModel fm = new FilmModel();
+			JSONObject jsonObject =  (JSONObject)object.getJSONObject("result");
+			
+			fm.setId(jsonO);
+			
 			System.out.println(jsonObject.getJSONObject("citynow").get("AQI"));
 		}else{
 			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
