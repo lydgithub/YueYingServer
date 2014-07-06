@@ -67,7 +67,7 @@ public class ActivityController {
 		//System.out.println(locationModel.getyPoint());
 		//return am.getXpoint() + am.getYpoint();
 		FilmModel filmModel=new FilmModel();
-		filmModel.setRes(0);
+		//filmModel.setRes(0);
 		return filmModel;
 		
 	}

@@ -26,6 +26,8 @@
 		<property name="c3p0.validate">true</property> 
 
 		<mapping class="yueying.dto.entity.User" />
+		<mapping class="yueying.dto.entity.Activity" />
+		<mapping class="yueying.dto.entity.Cinema" />
 
 	</session-factory>
 </hibernate-configuration>

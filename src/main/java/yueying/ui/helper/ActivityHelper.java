@@ -34,11 +34,13 @@ public class ActivityHelper {
 		activity.setTime(activityModel.getTime());
 		activity.setUser(null);*/
 		boolean success=false;
+		/*
 		if(userId!=activityModel.getUserId())
 			success=false;
 		else{
 			success=this.getActivityService().saveActivity(activityId,activityModel,userId);
 		}
+		*/
 		SaveActivityModel saveActivityModel=new SaveActivityModel();
 		saveActivityModel.setSuccess(success);
 		if(success){
@@ -46,6 +48,7 @@ public class ActivityHelper {
 		}
 		return saveActivityModel;
 	}
+
 
 
 	

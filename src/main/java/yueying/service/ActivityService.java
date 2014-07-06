@@ -36,6 +36,7 @@ public class ActivityService {
 			Activity activity = (Activity) session.get(Activity.class, activityId);
 			if (activity == null) {
 				activity = new Activity();
+				/*
 				activity.setId(activityModel.getId());
 				activity.setFilmId(activityModel.getFilmId());
 				activity.setCinemaId(activityModel.getCinemaId());
@@ -44,15 +45,18 @@ public class ActivityService {
 				activity.setTime(activityModel.getTime());
 				activity.setUser(user);
 				session.save(activity);
+				*/
 				
 			} 
 			else{
 				activity.setId(activityModel.getId());
+				/*
 				activity.setFilmId(activityModel.getFilmId());
 				activity.setCinemaId(activityModel.getCinemaId());
 				activity.setGentle(activityModel.getGentle());
 				activity.setPay(activityModel.getPay());
 				activity.setTime(activityModel.getTime());
+				*/
 			}
 
 			

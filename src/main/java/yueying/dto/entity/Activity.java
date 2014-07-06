@@ -2,6 +2,7 @@ package yueying.dto.entity;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -28,11 +29,11 @@ public class Activity{
 	 
 	private String cinemaId;
 	private String filmId;
-	private Time starttime;
+	private Timestamp starttime;
 	private float ticketPrice;
 	
 	private long launchUserId;
-	private Time launchTime;
+	private Timestamp launchTime;
 	private float launchLat;
 	private float launchlog;
 	
@@ -96,10 +97,10 @@ public class Activity{
 	}
 	
 	@Column(name = "start_time")
-	public Time getStarttime() {
+	public Timestamp getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Time starttime) {
+	public void setStarttime(Timestamp starttime) {
 		this.starttime = starttime;
 	}
 	
@@ -120,10 +121,10 @@ public class Activity{
 	}
 	
 	@Column(name = "launch_time")
-	public Time getLaunchTime() {
+	public Timestamp getLaunchTime() {
 		return launchTime;
 	}
-	public void setLaunchTime(Time launchTime) {
+	public void setLaunchTime(Timestamp launchTime) {
 		this.launchTime = launchTime;
 	}
 	
