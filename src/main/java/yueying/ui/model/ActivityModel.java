@@ -1,25 +1,17 @@
-package yueying.dto.entity;
+package yueying.ui.model;
 
-import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
-import org.apache.hadoop.hive.ql.parse.HiveParser.stringLiteralSequence_return;
-@Entity
-@Table(name = "activity")
-public class Activity{
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import yueying.util.TimestampAdapter;
+
+@XmlRootElement(name = "activity")
+public class ActivityModel {
 	private UUID id;
 	private byte gentle;
 	
@@ -29,21 +21,21 @@ public class Activity{
 	 
 	private String cinemaId;
 	private String filmId;
+	
+	//@XmlJavaTypeAdapter( TimestampAdapter.class)
 	private Timestamp starttime;
 	private float ticketPrice;
 	
 	private long launchUserId;
-	private Timestamp launchTime;
-	//private float launchLat;
-	//private float launchlog;
 	
-	private double laulat;
-	private double laulong;
+	//@XmlJavaTypeAdapter( TimestampAdapter.class)
+	private Timestamp launchTime;
+	private float launchLat;
+	private float launchlog;
 	
 	private long partnerUserId; 
 	
-	@Id
-	@Column(name = "id", length = 16)
+	@XmlElement
 	public UUID getId() {
 		return id;
 	}
@@ -51,7 +43,7 @@ public class Activity{
 		this.id = id;
 	}
 	
-	@Column(name = "gentle")
+	@XmlElement
 	public byte getGentle() {
 		return gentle;
 	}
@@ -59,7 +51,7 @@ public class Activity{
 		this.gentle = gentle;
 	}
 	
-	@Column(name = "style")
+	@XmlElement
 	public byte getStyle() {
 		return style;
 	}
@@ -67,7 +59,7 @@ public class Activity{
 		this.style = style;
 	}
 	
-	@Column(name = "expectation")
+	@XmlElement
 	public String getExpectation() {
 		return expectation;
 	}
@@ -75,7 +67,7 @@ public class Activity{
 		this.expectation = expectation;
 	}
 	
-	@Column(name = "status")
+	@XmlElement
 	public byte getStatus() {
 		return status;
 	}
@@ -83,7 +75,7 @@ public class Activity{
 		this.status = status;
 	}
 	
-	@Column(name = "cinema_id")
+	@XmlElement
 	public String getCinemaId() {
 		return cinemaId;
 	}
@@ -91,7 +83,7 @@ public class Activity{
 		this.cinemaId = cinemaId;
 	}
 	
-	@Column(name = "film_id")
+	@XmlElement
 	public String getFilmId() {
 		return filmId;
 	}
@@ -99,7 +91,7 @@ public class Activity{
 		this.filmId = filmId;
 	}
 	
-	@Column(name = "start_time")
+	@XmlElement
 	public Timestamp getStarttime() {
 		return starttime;
 	}
@@ -107,7 +99,7 @@ public class Activity{
 		this.starttime = starttime;
 	}
 	
-	@Column(name = "ticket_price")
+	@XmlElement
 	public float getTicketPrice() {
 		return ticketPrice;
 	}
@@ -115,7 +107,7 @@ public class Activity{
 		this.ticketPrice = ticketPrice;
 	}
 	
-	@Column(name = "launch_userid")
+	@XmlElement
 	public long getLaunchUserId() {
 		return launchUserId;
 	}
@@ -123,7 +115,7 @@ public class Activity{
 		this.launchUserId = launchUserId;
 	}
 	
-	@Column(name = "launch_time")
+	@XmlElement
 	public Timestamp getLaunchTime() {
 		return launchTime;
 	}
@@ -131,7 +123,7 @@ public class Activity{
 		this.launchTime = launchTime;
 	}
 	
-	@Column(name = "launch_lat")
+	@XmlElement
 	public float getLaunchLat() {
 		return launchLat;
 	}
@@ -139,7 +131,7 @@ public class Activity{
 		this.launchLat = launchLat;
 	}
 	
-	@Column(name = "launch_log")
+	@XmlElement
 	public float getLaunchlog() {
 		return launchlog;
 	}
@@ -147,14 +139,11 @@ public class Activity{
 		this.launchlog = launchlog;
 	}
 	
-	@Column(name = "partner_userid")
+	@XmlElement
 	public long getPartnerUserId() {
 		return partnerUserId;
 	}
 	public void setPartnerUserId(long partnerUserId) {
 		this.partnerUserId = partnerUserId;
 	}
-	
-	
-
 }
