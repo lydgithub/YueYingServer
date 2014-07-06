@@ -93,7 +93,7 @@
 			<artifactId>jackson-mapper-lgpl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		
+
 		
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -111,6 +111,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.3.4</version>
 		</dependency>
+
 	</dependencies>
 
 	<profiles></profiles>
