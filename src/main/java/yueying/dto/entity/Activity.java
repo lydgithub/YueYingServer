@@ -1,12 +1,20 @@
 package yueying.dto.entity;
 
+import java.io.Serializable;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "activity")
@@ -27,9 +35,12 @@ public class Activity{
 	private Timestamp launchTime;
 	private float launchLat;
 	private float launchlog;
-		
+	
+
+	
 	private long partnerUserId; 
 	
+	private int test;
 	@Id
 	@Column(name = "id", length = 16)
 	public UUID getId() {
