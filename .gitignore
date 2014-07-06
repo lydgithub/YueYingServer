@@ -2,7 +2,7 @@
 .project
 .classpath
 .DS_Store
-.settings
+.settings/
 *.class
 *.apk
 *.jar
