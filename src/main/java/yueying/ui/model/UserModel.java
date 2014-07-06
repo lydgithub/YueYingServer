@@ -2,7 +2,16 @@ package yueying.ui.model;
 
 import java.util.Date;
 
-//@XmlRootElement(name = "user")
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.mysql.jdbc.Blob;
+
+@XmlRootElement(name = "user")
 public class UserModel {
 
 	private long id;
@@ -22,7 +31,7 @@ public class UserModel {
 	private String photoUrl;
 	//private Blob photo;
 	
-//	@XmlElement
+	@XmlElement
 	public long getId() {
 		return id;
 	}
@@ -31,7 +40,7 @@ public class UserModel {
 		this.id = id;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public String getName() {
 		return name;
 	}
@@ -40,7 +49,7 @@ public class UserModel {
 		this.name = name;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public String getPassword() {
 		return password;
 	}
@@ -49,7 +58,7 @@ public class UserModel {
 		this.password = password;
 	}
 	
-//	@XmlElement
+	@XmlElement
 	public byte getGentle() {
 		return gentle;
 	}
@@ -58,7 +67,7 @@ public class UserModel {
 		this.gentle = gentle;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -67,7 +76,7 @@ public class UserModel {
 		this.birthday = birthday;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public float getHeight() {
 		return height;
 	}
@@ -76,7 +85,7 @@ public class UserModel {
 		this.height = height;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public float getWeight() {
 		return weight;
 	}
@@ -85,7 +94,7 @@ public class UserModel {
 		this.weight = weight;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public float getMonthlyIncome() {
 		return monthlyIncome;
 	}
@@ -94,7 +103,7 @@ public class UserModel {
 		this.monthlyIncome = monthlyIncome;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public int getProvinceId() {
 		return provinceId;
 	}
@@ -103,7 +112,7 @@ public class UserModel {
 		this.provinceId = provinceId;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public int getCityId() {
 		return cityId;
 	}
@@ -112,7 +121,7 @@ public class UserModel {
 		this.cityId = cityId;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public String getJob() {
 		return job;
 	}
@@ -121,7 +130,7 @@ public class UserModel {
 		this.job = job;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public byte getMarryed() {
 		return marryed;
 	}
@@ -130,7 +139,7 @@ public class UserModel {
 		this.marryed = marryed;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public String getTag() {
 		return tag;
 	}
@@ -139,7 +148,7 @@ public class UserModel {
 		this.tag = tag;
 	}
 
-//	@XmlElement
+	@XmlElement
 	public String getSignature() {
 		return signature;
 	}
