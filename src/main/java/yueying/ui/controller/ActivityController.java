@@ -56,8 +56,6 @@ public class ActivityController {
 	@ResponseBody
 	public FilmModel postLocation(@RequestBody LocationModel locationModel ) {
 		
-		/*FilmModel filmModel=new FilmModel();
-		filmModel.setId("0");*/
 		return this.getActivityHelper().getFilm(locationModel);
 		
 	}
