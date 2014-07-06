@@ -35,6 +35,7 @@ public class Activity{
 	private Timestamp launchTime;
 	private float launchLat;
 	private float launchlog;
+
 	
 	private long partnerUserId; 
 	
@@ -151,6 +152,7 @@ public class Activity{
 	public void setPartnerUserId(long partnerUserId) {
 		this.partnerUserId = partnerUserId;
 	}
+	
 	
 
 }
