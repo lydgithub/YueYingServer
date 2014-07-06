@@ -1,8 +1,8 @@
-/target/
-<<<<<<< HEAD
-=======
-/.project
-/.classpath
-/.DS_Store
-/.settings
->>>>>>> branch 'master' of https://github.com/lydgithub/YueYingServer
+.gitignore
+.project
+.classpath
+.DS_Store
+.settings/
+*.class
+*.apk
+*.jar

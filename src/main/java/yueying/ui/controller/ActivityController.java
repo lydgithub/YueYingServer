@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import yueying.ui.helper.ActivityHelper;
 import yueying.ui.model.ActivityListModel;
 import yueying.ui.model.ActivityModel;
+import yueying.ui.model.FilmBriefListModel;
 import yueying.ui.model.FilmModel;
 import yueying.ui.model.LocationModel;
 import yueying.ui.model.SaveActivityModel;
@@ -52,14 +53,34 @@ public class ActivityController {
 		return this.getActivityHelper().saveActivity(activityId,activityModel,userId);
 
 	}
-	@RequestMapping(value = "/getFilm/", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/getFilm/", method = RequestMethod.POST)
 	@ResponseBody
 	public FilmModel postLocation(@RequestBody LocationModel locationModel ) {
 
-		/*FilmModel filmModel=new FilmModel();
-		filmModel.setId("0");*/
+		FilmModel filmModel=new FilmModel();
+		filmModel.setId("0");
+		System.out.println("yes!go!");
+		return this.getActivityHelper().getFilm(locationModel);
+
+	}*/
+	@RequestMapping(value = "/getFilm/", method = RequestMethod.GET)
+	@ResponseBody
+	public FilmBriefListModel postLocation(HttpServletRequest request) {
+
+		LocationModel locationModel=new LocationModel();
+		locationModel.setPlace("Beijing");
 		return this.getActivityHelper().getFilm(locationModel);
 
 	}
+
+	
+/*	@RequestMapping(value = "/getFilm", method = RequestMethod.POST)
+	public @ResponseBody
+	FilmBriefListModel postLocation(@RequestBody  LocationModel lm ) {
+
+		System.out.println(lm.getxPoint());
+		return this.getActivityHelper().getFilm(lm);
+
+	}*/
 
 }
