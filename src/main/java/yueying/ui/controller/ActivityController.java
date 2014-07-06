@@ -56,12 +56,9 @@ public class ActivityController {
 	@ResponseBody
 	public FilmModel postLocation(@RequestBody LocationModel locationModel ) {
 		
-		//System.out.println(locationModel.getxPoint());
-		//System.out.println(locationModel.getyPoint());
-		//return am.getXpoint() + am.getYpoint();
-		FilmModel filmModel=new FilmModel();
-		filmModel.setId("0");
-		return filmModel;
+		/*FilmModel filmModel=new FilmModel();
+		filmModel.setId("0");*/
+		return this.getActivityHelper().getFilm(locationModel);
 		
 	}
 
