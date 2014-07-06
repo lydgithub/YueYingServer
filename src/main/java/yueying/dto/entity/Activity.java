@@ -29,16 +29,14 @@ public class Activity{
 	 
 	private String cinemaId;
 	private String filmId;
-	private Timestamp starttime;
+	private Time starttime;
 	private float ticketPrice;
 	
 	private long launchUserId;
 	private Timestamp launchTime;
-	//private float launchLat;
-	//private float launchlog;
-	
-	private double laulat;
-	private double laulong;
+	private float launchLat;
+	private float launchlog;
+
 	
 	private long partnerUserId; 
 	
