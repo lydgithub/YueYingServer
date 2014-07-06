@@ -1,7 +1,5 @@
 package yueying.ui.model;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -19,7 +17,7 @@ public class ActivityInfoModel {
 	private byte partnerGentle;
 	private byte style;
 	private String expectation;
-	private Timestamp startTime;
+	private String startTime;
 	
 	
 	//cinema info
@@ -35,7 +33,7 @@ public class ActivityInfoModel {
 	private String country;
 	private float score;
 	private int playMinutes;
-	private Date showTime;
+	private String showTime;
 	private String filmUrl;
 	
 	
@@ -122,11 +120,11 @@ public class ActivityInfoModel {
 		this.expectation = expectation;
 	}
 	
-	public Timestamp getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
@@ -212,11 +210,11 @@ public class ActivityInfoModel {
 		this.playMinutes = playMinutes;
 	}
 
-	public Date getShowTime() {
+	public String getShowTime() {
 		return showTime;
 	}
 
-	public void setShowTime(Date showTime) {
+	public void setShowTime(String showTime) {
 		this.showTime = showTime;
 	}
 	
