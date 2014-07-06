@@ -22,7 +22,7 @@ public class ActivityModel {
 	private String cinemaId;
 	private String filmId;
 	
-	//@XmlJavaTypeAdapter( TimestampAdapter.class)
+	
 	private Timestamp starttime;
 	private float ticketPrice;
 	
