@@ -73,7 +73,9 @@ public class ActivityHelper {
 	}
 
 	public FilmModel getFilm(LocationModel locationModel) {
+		System.out.println("success");
 		String cityName = locationModel.getPlace();//参数
+		System.out.println(cityName);
 		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_FILM_URL);//url为请求的api接口地址
 	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//申请的对应key
 	    Properties cityNTI= this.getCityConfiguration().getProperties();
