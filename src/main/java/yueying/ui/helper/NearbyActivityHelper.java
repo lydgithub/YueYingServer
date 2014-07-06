@@ -107,12 +107,13 @@ public class NearbyActivityHelper {
 			FilmModel fm = new FilmModel();
 			JSONObject jsonObject =  (JSONObject)object.getJSONObject("result");
 			
-			fm.setId(jsonO);
+			//fm.setId(jsonO);
 			
 			System.out.println(jsonObject.getJSONObject("citynow").get("AQI"));
 		}else{
 			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
 		}
+		return null;
 		
 	}
 /**
