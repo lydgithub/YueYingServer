@@ -1,6 +1,7 @@
 package yueying.ui.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -29,6 +30,16 @@ public class ActivityInfoModel {
 	
 	//fime info
 	private String filmId;
+	private String filmName;
+	private String filmType;
+	private String country;
+	private float score;
+	private int playMinutes;
+	private Date showTime;
+	private String filmUrl;
+	
+	
+
 	
 
 	public long getLaunchUserId() {
@@ -159,6 +170,62 @@ public class ActivityInfoModel {
 
 	public void setFilmId(String filmId) {
 		this.filmId = filmId;
+	}
+
+	public String getFilmName() {
+		return filmName;
+	}
+
+	public void setFilmName(String filmName) {
+		this.filmName = filmName;
+	}
+
+	public String getFilmType() {
+		return filmType;
+	}
+
+	public void setFilmType(String filmType) {
+		this.filmType = filmType;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public float getScore() {
+		return score;
+	}
+
+	public void setScore(float score) {
+		this.score = score;
+	}
+
+	public int getPlayMinutes() {
+		return playMinutes;
+	}
+
+	public void setPlayMinutes(int playMinutes) {
+		this.playMinutes = playMinutes;
+	}
+
+	public Date getShowTime() {
+		return showTime;
+	}
+
+	public void setShowTime(Date showTime) {
+		this.showTime = showTime;
+	}
+	
+	public String getFilmUrl() {
+		return filmUrl;
+	}
+
+	public void setFilmUrl(String filmUrl) {
+		this.filmUrl = filmUrl;
 	}
 	
 	
