@@ -38,6 +38,7 @@ public class Activity{
 	
 	private long partnerUserId; 
 	
+	private int test;
 	@Id
 	@Column(name = "id", length = 16)
 	public UUID getId() {
