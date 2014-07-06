@@ -36,7 +36,7 @@ public class Activity{
 	private float launchLat;
 	private float launchlog;
 	
-	private String lyd;
+	private int lyd;
 
 	
 	private long partnerUserId; 
