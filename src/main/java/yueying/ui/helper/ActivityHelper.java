@@ -49,7 +49,7 @@ public class ActivityHelper {
 		
 	}
 	public SaveActivityModel saveActivity(UUID activityId,ActivityModel activityModel,
-			int userId) {
+			long userId) {
 		/*Activity activity=new Activity();
 		activity.setId(activityModel.getId());
 		activity.setFilmId(activityModel.getFilmId());
@@ -59,7 +59,7 @@ public class ActivityHelper {
 		activity.setTime(activityModel.getTime());
 		activity.setUser(null);*/
 		boolean success=false;
-		if(userId!=activityModel.getUserId())
+		if(userId!=activityModel.getLaunchUserId())
 			success=false;
 		else{
 			success=this.getActivityService().saveActivity(activityId,activityModel,userId);
