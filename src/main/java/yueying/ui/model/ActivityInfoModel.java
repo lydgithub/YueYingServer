@@ -36,7 +36,9 @@ public class ActivityInfoModel {
 	private String showTime;
 	private String filmUrl;
 	
-	
+	//statistics info
+	private int applyCount;
+	private int collectCount;
 
 	
 
@@ -224,6 +226,22 @@ public class ActivityInfoModel {
 
 	public void setFilmUrl(String filmUrl) {
 		this.filmUrl = filmUrl;
+	}
+
+	public int getApplyCount() {
+		return applyCount;
+	}
+
+	public void setApplyCount(int applyCount) {
+		this.applyCount = applyCount;
+	}
+
+	public int getCollectCount() {
+		return collectCount;
+	}
+
+	public void setCollectCount(int collectCount) {
+		this.collectCount = collectCount;
 	}
 	
 	
