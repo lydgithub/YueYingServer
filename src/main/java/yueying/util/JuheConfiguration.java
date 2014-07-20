@@ -12,7 +12,7 @@ public class JuheConfiguration {
 	
 	public static final String KEY = "key";
 	public static final String SHOW_FILM_URL = "show_film_url";
-	public static final String WORKSPACE_LOCAL = "workspace_local";
+	public static final String QUERY_MOVIE_URL = "query_movie_url";
 	public static final String WORKSPACE_HDFS = "workspace_hdfs";
 	public static final String MIDDLE_DATA_HDFS = "middle_data_hdfs";
 	

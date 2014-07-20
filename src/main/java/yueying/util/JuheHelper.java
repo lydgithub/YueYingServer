@@ -9,11 +9,10 @@ import java.net.URL;
 
 import org.springframework.stereotype.Component;
 
-import net.sf.json.JSONObject;
 
 @Component
 public class JuheHelper {
-   public static void main(String[] args) {
+  /* public static void main(String[] args) {
 	String city = "suzhou";//参数
 	String url = "http://web.juhe.cn:8080/environment/air/cityair?city=";//url为请求的api接口地址
     String key= "################################";//申请的对应key
@@ -30,7 +29,7 @@ public class JuheHelper {
 	}else{
 		System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
 	}
-}
+}*/
    /**
     * 
     * @param urlAll:请求接口
