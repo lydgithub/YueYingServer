@@ -35,13 +35,11 @@ public class Activity{
 	private Timestamp launchTime;
 	private float launchLat;
 	private float launchlog;
-	
 
 	
 	private long partnerUserId; 
 	
-	private int lyd;
-	
+	private int test;
 	@Id
 	@Column(name = "id", length = 16)
 	public UUID getId() {
