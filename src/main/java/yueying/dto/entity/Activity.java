@@ -35,6 +35,7 @@ public class Activity{
 	private Timestamp launchTime;
 	private float launchLat;
 	private float launchlog;
+
 	
 	private long partnerUserId; 
 	
