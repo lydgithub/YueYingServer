@@ -46,7 +46,7 @@ public class ActivityController {
 
 	@RequestMapping(value = "/putAct/{activityId}", method = RequestMethod.POST)
 	@ResponseBody
-	public SaveActivityModel post(HttpServletRequest request,@PathVariable UUID activityId,
+	public SaveActivityModel post(HttpServletRequest request,@PathVariable long activityId,
 
 			ActivityModel activityModel){
 		Integer userId=(Integer) request.getSession().getAttribute("userid");

@@ -2,6 +2,7 @@ package yueying.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -33,7 +34,15 @@ public class NearbyActivityService {
 		
 		try {
 			session.beginTransaction();
-			String hql = "from Activity act,User u,Cinema c where act.launchUserId = u.id and act.cinemaId = c.id ";
+			
+			String hql = "select act,u,c "
+					+ "from Activity act,User u,Cinema c "
+					+ "where act.launchUserId = u.id and act.cinemaId = c.id ";
+					
+			/*
+			String hql = "from Activity act,User u,Cinema c "
+					+ "where act.launchUserId = u.id and act.cinemaId = c.id ";
+					*/
 			Query query = session.createQuery(hql);
 			query.setFirstResult((listid - 1) * sumOfPage);
 			query.setMaxResults(sumOfPage);
@@ -52,6 +61,41 @@ public class NearbyActivityService {
 			return null;
 		}
 
+	}
+	public List getCount(long activityId,int flag){
+		
+		Session session = this.getSessionHelper().openSession();
+		
+		List list = new ArrayList();
+		
+		try {
+			session.beginTransaction();
+			
+			String hql = "select count(apply)"
+					+ "from ApplyActivity as apply "
+					+ "where apply.activityId= :id and apply.applyStatus = :status ";
+					
+			/*
+			String hql = "from Activity act,User u,Cinema c "
+					+ "where act.launchUserId = u.id and act.cinemaId = c.id ";
+					*/
+			Query query = session.createQuery(hql);
+			//query.setString("id", activityId.toString());
+			query.setString("status", new Integer(flag).toString());
+			
+			list = query.list();
+			
+			session.getTransaction().commit();
+			session.close();
+			return list;
+		} catch (Exception e) {
+			System.out.println("error!!!!!!!");
+			// TODO Auto-generated catch block
+			session.getTransaction().rollback();
+			session.close();
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	//add functions

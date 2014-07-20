@@ -12,7 +12,7 @@ import yueying.util.TimestampAdapter;
 
 @XmlRootElement(name = "activity")
 public class ActivityModel {
-	private UUID id;
+	private long id;
 	private byte gentle;
 	
 	private byte style;
@@ -36,10 +36,10 @@ public class ActivityModel {
 	private long partnerUserId; 
 	
 	@XmlElement
-	public UUID getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

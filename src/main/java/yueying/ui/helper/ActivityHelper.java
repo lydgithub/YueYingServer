@@ -52,7 +52,7 @@ public class ActivityHelper {
 		this.cityConfiguration=cityConfiguration;
 		
 	}
-	public SaveActivityModel saveActivity(UUID activityId,ActivityModel activityModel,
+	public SaveActivityModel saveActivity(long activityId,ActivityModel activityModel,
 			long userId) {
 		/*Activity activity=new Activity();
 		activity.setId(activityModel.getId());

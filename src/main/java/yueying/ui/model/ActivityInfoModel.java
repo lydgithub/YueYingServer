@@ -13,7 +13,7 @@ public class ActivityInfoModel {
 	private String tag;
 	
 	//activity info
-	private UUID id;
+	private long id;
 	private byte partnerGentle;
 	private byte style;
 	private String expectation;
@@ -88,11 +88,11 @@ public class ActivityInfoModel {
 		this.tag = tag;
 	}
 
-	public UUID getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -227,5 +227,4 @@ public class ActivityInfoModel {
 	}
 	
 	
-
 }

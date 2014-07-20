@@ -28,6 +28,7 @@
 		<mapping class="yueying.dto.entity.User" />
 		<mapping class="yueying.dto.entity.Activity" />
 		<mapping class="yueying.dto.entity.Cinema" />
+		<mapping class="yueying.dto.entity.ApplyActivity" />
 
 	</session-factory>
 </hibernate-configuration>

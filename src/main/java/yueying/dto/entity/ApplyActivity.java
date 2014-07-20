@@ -1,5 +1,6 @@
 package yueying.dto.entity;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -13,9 +14,10 @@ import javax.persistence.Table;
 @Table(name = "apply")
 public class ApplyActivity {
 	private long id;
-	private UUID activityId;
+	private long activityId;
 	private long userId;
 	private byte applyStatus; //1 ±¨Ãû£»2 ÊÕ²Ø
+	private Timestamp applyTime;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +30,10 @@ public class ApplyActivity {
 	}
 	
 	@Column(name = "activity_id", nullable = false)
-	public UUID getActivityId() {
+	public long getActivityId() {
 		return activityId;
 	}
-	public void setActivityId(UUID activityId) {
+	public void setActivityId(long activityId) {
 		this.activityId = activityId;
 	}
 	
@@ -49,6 +51,14 @@ public class ApplyActivity {
 	}
 	public void setApplyStatus(byte applyStatus) {
 		this.applyStatus = applyStatus;
+	}
+	
+	@Column(name = "apply_time",nullable = false)
+	public Timestamp getApplyTime() {
+		return applyTime;
+	}
+	public void setApplyTime(Timestamp applyTime) {
+		this.applyTime = applyTime;
 	}
 
 }

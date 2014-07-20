@@ -19,7 +19,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "activity")
 public class Activity{
-	private UUID id;
+	private long id;
 	private byte gentle;
 	
 	private byte style;
@@ -36,17 +36,14 @@ public class Activity{
 	private float launchLat;
 	private float launchlog;
 	
-
-	
 	private long partnerUserId; 
 	
-	private int test;
 	@Id
-	@Column(name = "id", length = 16)
-	public UUID getId() {
+	@Column(name = "id", length = 128)
+	public long getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import net.sf.json.JSONObject;
 
@@ -38,11 +39,11 @@ public class NearbyActivityHelper {
 		this.nearbyActivityService = nearbyActivityService;
 	}
 
-	private JuheConfiguration getJuheConfiguration(){
+	public JuheConfiguration getJuheConfiguration(){
 		return juheConfiguration;
 	}
 	@Autowired
-	private void setJuheConfiguration(JuheConfiguration juheConfiguration) {
+	public void setJuheConfiguration(JuheConfiguration juheConfiguration) {
 		this.juheConfiguration=juheConfiguration;
 	}
 	
@@ -67,7 +68,29 @@ public class NearbyActivityHelper {
 			User user = (User) o[1];   
 			Cinema cinema = (Cinema) o[2];
 			
+			//获得当前活动报名人数和收藏人数
+			long activityId = activity.getId();
+			ArrayList applyCountList = (ArrayList)getNearbyActivityService().getCount(activityId, 1);
+			int applyCount = 0;
+			Iterator iterator2 = applyCountList.iterator();
+			while(iterator2.hasNext()){
+				Long object =(Long)iterator2.next();
+				applyCount = object.intValue(); 
+			}
+			
+			System.out.println(UUID.randomUUID().toString() );
+			
+			
+			System.out.println(applyCount);
+		
+			/*
+			Object collectCountObject = o[4];
+			
+			*/
+			//System.out.println("applycount:" + applyCountObject);
+			
 			activityInfoModel.setId(activity.getId());
+			System.out.println(activity.getId());
 			activityInfoModel.setPartnerGentle(activity.getGentle());
 			activityInfoModel.setStyle(activity.getStyle());
 			activityInfoModel.setExpectation(activity.getExpectation());
@@ -152,7 +175,11 @@ public class NearbyActivityHelper {
 			fm.setCountry(jsonObject.getString("country"));
 			
 			String runtime = jsonObject.getString("runtime");
-			if(!runtime.equals("null") && runtime != null && runtime.length() != 0){
+			/*
+			System.out.println(runtime);
+			System.out.println(runtime.equals("\"null\""));
+			*/
+			if(runtime != null && !runtime.equals("\"null\"") && runtime.length() != 0){
 				fm.setPlayMinutes(Integer.parseInt(runtime));
 			}				
 			
@@ -164,13 +191,11 @@ public class NearbyActivityHelper {
 			fm.setShowTime(showTime); 
 			
 			String rating = jsonObject.getString("rating");
-			if(!rating.equals("null") && rating != null && rating.length() != 0)
+			if(!rating.equals("\"null\"") && rating != null && rating.length() != 0)
 				fm.setScore(Float.parseFloat(rating));
 			
 			fm.setPhotoUrl(jsonObject.getString("poster"));
-			
-			System.out.println("runtime:" + jsonObject.getString("runtime"));
-			
+					
 			return fm;
 		}else{
 			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
