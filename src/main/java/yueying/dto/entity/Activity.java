@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
-import org.apache.hadoop.hive.ql.parse.HiveParser.stringLiteralSequence_return;
 @Entity
 @Table(name = "activity")
 public class Activity{
@@ -37,11 +36,11 @@ public class Activity{
 	private float launchLat;
 	private float launchlog;
 	
-	private String lyd;
 
 	
 	private long partnerUserId; 
 	
+	private int test;
 	@Id
 	@Column(name = "id", length = 16)
 	public UUID getId() {

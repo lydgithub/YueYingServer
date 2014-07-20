@@ -27,7 +27,7 @@ public class ActivityService {
 	private void setSessionHelper(SessionHelper sessionHelper) {
 		this.sessionHelper = sessionHelper;
 	}
-	public boolean saveActivity(UUID activityId,ActivityModel activityModel, int userId) {
+	public boolean saveActivity(UUID activityId,ActivityModel activityModel, long userId) {
 		
 		Session session = this.getSessionHelper().openSession();
 		Transaction transaction = session.beginTransaction();

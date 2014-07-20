@@ -8,8 +8,6 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import yueying.dto.entity.Activity;
-import yueying.dto.entity.User;
 import yueying.util.SessionHelper;
 
 @Component
@@ -28,7 +26,7 @@ public class NearbyActivityService {
 	
 	@SuppressWarnings("unchecked")
 	//maybe include an id which represent the sequence of pages
-	public List getAllActivity(float xPoint,float yPoint,int listid) {
+	public List getAllActivity(double xPoint,double yPoint,int listid) {
 		Session session = this.getSessionHelper().openSession();
 		int sumOfPage = 5;
 		List list = new ArrayList();
