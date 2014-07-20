@@ -15,6 +15,7 @@ public class JuheConfiguration {
 	public static final String QUERY_MOVIE_URL = "query_movie_url";
 	public static final String SHOW_CINEMA_BY_FILM_URL = "show_cinema_by_film_url";
 	public static final String SHOW_CINEMA_BY_LOCATION_URL = "show_cinema_by_location_url";
+	public static final String SHOW_FILM_BROADCAST_OF_CINEMA = "show_film_broadcast_of_cinema";
 	
 	public static final String FS_DEFAULT_NAME = "fs.default.name";
 	

@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 
 
 
+
 import yueying.service.ActivityService;
 import yueying.ui.model.ActivityModel;
+import yueying.ui.model.BroadcastModel;
 import yueying.ui.model.CinemaListModel;
 import yueying.ui.model.CinemaModel;
 import yueying.ui.model.FilmBriefListModel;
@@ -127,10 +129,10 @@ public class ActivityHelper {
 		if(cinemasIdMap==null){
 			return null;
 		}
-		return getCinemasByLocation(xPoint, yPoint, cityName, cinemasIdMap);
+		return getCinemasByLocation(xPoint, yPoint, cityName,movieId, cinemasIdMap);
 	}
 	
-	public CinemaListModel getCinemasByLocation(double xPoint,double yPoint,String cityName,Map<String, Integer> cinemasIdMap){
+	public CinemaListModel getCinemasByLocation(double xPoint,double yPoint,String cityName,String movieId,Map<String, Integer> cinemasIdMap){
 		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_LOCATION_URL);//url�����������������api������������
 	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//�������������������key
 	    
@@ -172,6 +174,9 @@ public class ActivityHelper {
 					cinemaModel.setLatitude(lat);
 					double lon = jsonObject.getDouble("longitude");
 					cinemaModel.setLogitude(lon);
+					
+					cinemaModel.setBroadcast(getBroadcastsByCinema(movieId, id));
+					
 					cinemaListModel.getCinemaModels().add(cinemaModel);
 				}
 			}
@@ -250,8 +255,44 @@ public class ActivityHelper {
 		}
 	}
 	
-	//get the 
-
+	//get the broadcast info of some film in exact cinema.
+	public List<BroadcastModel> getBroadcastsByCinema(String movieId,String cinemaId){
+		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_FILM_BROADCAST_OF_CINEMA);//url�����������������api������������
+	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//�������������������key
+	    
+		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&dtype=json&cinemaid=").append(cinemaId).append("&movieid=").append(movieId).toString(); 
+		String charset ="UTF-8";
+		String jsonResult = JuheHelper.get(urlAll, charset);//��������JSON��������
+		JSONObject object = JSONObject.fromObject(jsonResult);//����������JSON������
+		String code = object.getString("error_code");//��������������������������
+		//��������������������������
+		if(code.equals("0")){
+			
+			JSONArray jsonArray =  (JSONArray)object.getJSONObject("result").getJSONArray("lists");
+			if(jsonArray.size() == 0)
+				return null;
+			JSONArray broadcastArray = (JSONArray)jsonArray.getJSONObject(0).getJSONArray("broadcast");
+			    	
+			List<BroadcastModel> broadcastList = new ArrayList<BroadcastModel>();
+			
+			for(int i=0;i<broadcastArray.size();i++){
+				
+				JSONObject jsonObject=broadcastArray.getJSONObject(i);
+				BroadcastModel bcModel = new BroadcastModel();
+				
+				bcModel.setHall(jsonObject.getString("hall"));
+				bcModel.setPrice(jsonObject.getString("price"));
+				bcModel.setTicketUrl(jsonObject.getString("ticket_url"));
+				bcModel.setTime(jsonObject.getString("time"));
+				
+				broadcastList.add(bcModel);
+			}
+			return broadcastList;
+		}else{
+			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
+			return null;
+		}
+	}
 	
 
 }

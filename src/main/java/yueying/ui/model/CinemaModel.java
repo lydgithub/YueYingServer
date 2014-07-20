@@ -1,5 +1,7 @@
 package yueying.ui.model;
 
+import java.util.List;
+
 public class CinemaModel {
 	
 	private String id;
@@ -8,6 +10,8 @@ public class CinemaModel {
 	private double latitude;
 	private double logitude;
 	private String distance;
+	
+	private List<BroadcastModel> broadcast;
 	
 	public String getId() {
 		return id;
@@ -48,6 +52,12 @@ public class CinemaModel {
 	}
 	public void setDistance(String distance) {
 		this.distance = distance;
+	}
+	public List<BroadcastModel> getBroadcast() {
+		return broadcast;
+	}
+	public void setBroadcast(List<BroadcastModel> broadcast) {
+		this.broadcast = broadcast;
 	}
 
 }
