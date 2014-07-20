@@ -91,7 +91,9 @@ public class ActivityHelper {
 	    String cityId=cityNTI.getProperty(cityName);
 		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&cityid=").append(cityId).toString(); 
 		String charset ="UTF-8";
+		
 		String jsonResult = JuheHelper.get(urlAll, charset);//��������JSON��������
+		
 		JSONObject object = JSONObject.fromObject(jsonResult);//����������JSON������
 		String code = object.getString("error_code");//��������������������������
 		//��������������������������
@@ -127,11 +129,16 @@ public class ActivityHelper {
 		}
 		return getCinemasByLocation(xPoint, yPoint, cityName, cinemasIdMap);
 	}
+	
 	public CinemaListModel getCinemasByLocation(double xPoint,double yPoint,String cityName,Map<String, Integer> cinemasIdMap){
 		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_LOCATION_URL);//url�����������������api������������
 	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//�������������������key
+	    
 	    Properties cityNTI= this.getCityConfiguration().getProperties();
 	    String cityId=cityNTI.getProperty(cityName);
+	    //TODO
+	    yPoint = 116.3393;
+	    
 		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&dtype=json&lat=").append(xPoint).append("&lon=").append(yPoint).append("&radius=2000").toString(); 
 		String charset ="UTF-8";
 		String jsonResult = JuheHelper.get(urlAll, charset);//��������JSON��������
@@ -139,16 +146,19 @@ public class ActivityHelper {
 		String code = object.getString("error_code");//��������������������������
 		//��������������������������
 		if(code.equals("0")){
+			System.out.println(xPoint + " " + yPoint);
 			//����������������������������������
 			JSONArray jsonArray =  (JSONArray)object.getJSONArray("result");
 			CinemaListModel cinemaListModel=new CinemaListModel();
 			cinemaListModel.setCinemaModels(new ArrayList<CinemaModel>());
 			
+			System.out.println(jsonArray.size());
 			for(int i=0;i<jsonArray.size();i++){
 				
 				JSONObject jsonObject=jsonArray.getJSONObject(i);
 				
 				String id=jsonObject.getString("id");
+				System.out.println("cinemaid" + id);
 				if (cinemasIdMap.containsKey(id)) {
 					CinemaModel cinemaModel=new CinemaModel();
 					cinemaModel.setId(id);
@@ -174,12 +184,15 @@ public class ActivityHelper {
 	public Map<String,Integer>  getCinemasIdByFilm(String cityName,String movieId){
 		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_FILM_URL);//url�����������������api������������
 	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//�������������������key
+	    
 	    Properties cityNTI= this.getCityConfiguration().getProperties();
 	    String cityId=cityNTI.getProperty(cityName);
 		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&cityid=").append(cityId).append("&movieid=").append(movieId).toString(); 
 		String charset ="UTF-8";
+		
 		String jsonResult = JuheHelper.get(urlAll, charset);//��������JSON��������
 		JSONObject object = JSONObject.fromObject(jsonResult);//����������JSON������
+		
 		String code = object.getString("error_code");//��������������������������
 		//��������������������������
 		if(code.equals("0")){
@@ -189,6 +202,9 @@ public class ActivityHelper {
 			for(int i=0;i<jsonArray.size();i++){
 				JSONObject jsonObject=jsonArray.getJSONObject(i);
 				String id=jsonObject.getString("cinemaId");
+				
+				//System.out.println("byfilm" +id);
+				
 				cinemasIdMap.put(id, 1);
 			}
 			return cinemasIdMap;
@@ -197,6 +213,7 @@ public class ActivityHelper {
 			return null;
 		}
 	}
+	
 	public CinemaListModel getCinemasByFilm(String cityName,String movieId){
 		System.out.println(cityName);
 		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_FILM_URL);//url�����������������api������������
@@ -232,6 +249,8 @@ public class ActivityHelper {
 			return null;
 		}
 	}
+	
+	//get the 
 
 	
 

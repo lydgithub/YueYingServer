@@ -35,7 +35,7 @@ public class ActivityController {
 	}
 
 
-
+    /*
 	@RequestMapping(value = "/getAct/{xPoint}/{yPoint}", method = RequestMethod.GET)
 	@ResponseBody
 	public ActivityListModel get(@PathVariable float xPoint,@PathVariable float yPoint,HttpServletRequest request){
@@ -44,6 +44,7 @@ public class ActivityController {
 		activityListModel.setPoint(res);
 		return activityListModel;
 	}
+	*/
 
 	@RequestMapping(value = "/putAct/{activityId}", method = RequestMethod.POST)
 	@ResponseBody
