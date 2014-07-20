@@ -49,7 +49,6 @@ public class NearbyActivityHelper {
 	
 	
 	public NearbyListModel getNearbyActivity(double xPoint,double yPoint,int listid){
-		//getNearbyActivity
 		
 		ArrayList slist = (ArrayList)this.getNearbyActivityService().getAllActivity(xPoint,yPoint,listid);
 		if(slist==null)
@@ -57,8 +56,7 @@ public class NearbyActivityHelper {
 		
 		NearbyListModel nearbyListModel = new NearbyListModel();
 		List<ActivityInfoModel> nearbyActivityList = new ArrayList<ActivityInfoModel>();
-		
-		 
+			 
 		Iterator iterator = slist.iterator();  
 		while (iterator.hasNext()) {   
 			ActivityInfoModel activityInfoModel = new ActivityInfoModel();
@@ -91,14 +89,15 @@ public class NearbyActivityHelper {
 			System.out.println("collectcount:" + collectCount);
 			activityInfoModel.setCollectCount(collectCount);
 			
+			//activity info
 			activityInfoModel.setId(activity.getId());
-			//System.out.println(activity.getId());
 			activityInfoModel.setPartnerGentle(activity.getGentle());
 			activityInfoModel.setStyle(activity.getStyle());
 			activityInfoModel.setExpectation(activity.getExpectation());
 			//transfer timestamp to string
 			activityInfoModel.setStartTime(CalenderProcess.transferTimestampToString(activity.getStarttime(),"yyyy-MM-dd HH:mm:ss"));
 			
+			//user info
 			activityInfoModel.setLaunchUserId(user.getId());
 			activityInfoModel.setPhotoUrl(user.getPhoto());
 			activityInfoModel.setName(user.getName());
@@ -116,14 +115,16 @@ public class NearbyActivityHelper {
 			}
 			activityInfoModel.setTag(user.getTag());
 			
+			//cinema info
 			activityInfoModel.setCinemaId(cinema.getId());
 			activityInfoModel.setCinemaName(cinema.getName());
-			activityInfoModel.setCinemaAddress(cinema.getAddress());
-			
+			activityInfoModel.setCinemaAddress(cinema.getAddress());		
+			//TODO 
 			//count the distance
 			//activityInfoModel.setDistance(distance);
 			
-			String filmId = "137724";
+			//Film info
+			String filmId = activity.getFilmId();
 			activityInfoModel.setFilmId(filmId);
 			try {
 				//获取聚合json数据
@@ -138,7 +139,7 @@ public class NearbyActivityHelper {
 				activityInfoModel.setShowTime(fm.getShowTime());
 				activityInfoModel.setFilmUrl(fm.getPhotoUrl());
 				
-				System.out.println("poster" + fm.getPhotoUrl());
+				//System.out.println("poster" + fm.getPhotoUrl());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
