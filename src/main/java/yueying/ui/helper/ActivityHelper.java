@@ -1,12 +1,16 @@
 package yueying.ui.helper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +18,8 @@ import org.springframework.stereotype.Component;
 
 import yueying.service.ActivityService;
 import yueying.ui.model.ActivityModel;
+import yueying.ui.model.CinemaListModel;
+import yueying.ui.model.CinemaModel;
 import yueying.ui.model.FilmBriefListModel;
 import yueying.ui.model.FilmBriefModel;
 import yueying.ui.model.FilmModel;
@@ -76,21 +82,21 @@ public class ActivityHelper {
 		return saveActivityModel;
 	}
 
-	public FilmBriefListModel getFilm(LocationModel locationModel) {
-		String cityName = locationModel.getPlace();//²ÎÊý
+	public FilmBriefListModel getFilm(String cityName) {
+		//String cityName = locationModel.getPlace();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		System.out.println(cityName);
-		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_FILM_URL);//urlÎªÇëÇóµÄapi½Ó¿ÚµØÖ·
-	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//ÉêÇëµÄ¶ÔÓ¦key
+		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_FILM_URL);//urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½apiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½key
 	    Properties cityNTI= this.getCityConfiguration().getProperties();
 	    String cityId=cityNTI.getProperty(cityName);
 		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&cityid=").append(cityId).toString(); 
 		String charset ="UTF-8";
-		String jsonResult = JuheHelper.get(urlAll, charset);//µÃµ½JSON×Ö·û´®
-		JSONObject object = JSONObject.fromObject(jsonResult);//×ª»¯ÎªJSONÀà
-		String code = object.getString("error_code");//µÃµ½´íÎóÂë
-		//´íÎóÂëÅÐ¶Ï
+		String jsonResult = JuheHelper.get(urlAll, charset);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		JSONObject object = JSONObject.fromObject(jsonResult);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String code = object.getString("error_code");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(code.equals("0")){
-			//¸ù¾ÝÐèÒªÈ¡µÃÊý¾Ý
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			JSONArray jsonArray =  (JSONArray)object.getJSONArray("result");
 			FilmBriefListModel filmBriefListModel=new FilmBriefListModel();
 			filmBriefListModel.setFilmBriefModels(new ArrayList<FilmBriefModel>());
@@ -113,6 +119,119 @@ public class ActivityHelper {
 		
 	}
 
+	public CinemaListModel getCinemas(double xPoint, double yPoint,
+			String cityName, String movieId) {
+		Map<String, Integer> cinemasIdMap=getCinemasIdByFilm(cityName,movieId);
+		if(cinemasIdMap==null){
+			return null;
+		}
+		return getCinemasByLocation(xPoint, yPoint, cityName, cinemasIdMap);
+	}
+	public CinemaListModel getCinemasByLocation(double xPoint,double yPoint,String cityName,Map<String, Integer> cinemasIdMap){
+		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_LOCATION_URL);//urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½apiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½key
+	    Properties cityNTI= this.getCityConfiguration().getProperties();
+	    String cityId=cityNTI.getProperty(cityName);
+		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&dtype=json&lat=").append(xPoint).append("&lon=").append(yPoint).append("&radius=2000").toString(); 
+		String charset ="UTF-8";
+		String jsonResult = JuheHelper.get(urlAll, charset);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		JSONObject object = JSONObject.fromObject(jsonResult);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String code = object.getString("error_code");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(code.equals("0")){
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			JSONArray jsonArray =  (JSONArray)object.getJSONArray("result");
+			CinemaListModel cinemaListModel=new CinemaListModel();
+			cinemaListModel.setCinemaModels(new ArrayList<CinemaModel>());
+			
+			for(int i=0;i<jsonArray.size();i++){
+				
+				JSONObject jsonObject=jsonArray.getJSONObject(i);
+				
+				String id=jsonObject.getString("id");
+				if (cinemasIdMap.containsKey(id)) {
+					CinemaModel cinemaModel=new CinemaModel();
+					cinemaModel.setId(id);
+					String name = jsonObject.getString("cinemaName");
+					cinemaModel.setName(name);
+					String address = jsonObject.getString("address");
+					cinemaModel.setAddress(address);
+					String distance = jsonObject.getString("distance");
+					cinemaModel.setDistance(distance);
+					double lat = jsonObject.getDouble("latitude");
+					cinemaModel.setLatitude(lat);
+					double lon = jsonObject.getDouble("longitude");
+					cinemaModel.setLogitude(lon);
+					cinemaListModel.getCinemaModels().add(cinemaModel);
+				}
+			}
+			return cinemaListModel;
+		}else{
+			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
+			return null;
+		}
+	}
+	public Map<String,Integer>  getCinemasIdByFilm(String cityName,String movieId){
+		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_FILM_URL);//urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½apiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½key
+	    Properties cityNTI= this.getCityConfiguration().getProperties();
+	    String cityId=cityNTI.getProperty(cityName);
+		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&cityid=").append(cityId).append("&movieid=").append(movieId).toString(); 
+		String charset ="UTF-8";
+		String jsonResult = JuheHelper.get(urlAll, charset);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		JSONObject object = JSONObject.fromObject(jsonResult);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String code = object.getString("error_code");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(code.equals("0")){
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			JSONArray jsonArray =  (JSONArray)object.getJSONArray("result");
+			Map<String, Integer> cinemasIdMap=new HashMap<String,Integer>();
+			for(int i=0;i<jsonArray.size();i++){
+				JSONObject jsonObject=jsonArray.getJSONObject(i);
+				String id=jsonObject.getString("cinemaId");
+				cinemasIdMap.put(id, 1);
+			}
+			return cinemasIdMap;
+		}else{
+			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
+			return null;
+		}
+	}
+	public CinemaListModel getCinemasByFilm(String cityName,String movieId){
+		System.out.println(cityName);
+		String url = this.getJuheConfiguration().getProperty(JuheConfiguration.SHOW_CINEMA_BY_FILM_URL);//urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½apiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    String key= this.getJuheConfiguration().getProperty(JuheConfiguration.KEY);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½key
+	    Properties cityNTI= this.getCityConfiguration().getProperties();
+	    String cityId=cityNTI.getProperty(cityName);
+		String urlAll = new StringBuffer(url).append("?key=").append(key).append("&cityid=").append(cityId).append("&movieid=").append(movieId).toString(); 
+		String charset ="UTF-8";
+		String jsonResult = JuheHelper.get(urlAll, charset);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		JSONObject object = JSONObject.fromObject(jsonResult);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String code = object.getString("error_code");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(code.equals("0")){
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			JSONArray jsonArray =  (JSONArray)object.getJSONArray("result");
+			CinemaListModel cinemaListModel=new CinemaListModel();
+			cinemaListModel.setCinemaModels(new ArrayList<CinemaModel>());
+			
+			for(int i=0;i<jsonArray.size();i++){
+				CinemaModel cinemaModel=new CinemaModel();
+				JSONObject jsonObject=jsonArray.getJSONObject(i);
+				String name=jsonObject.getString("cinemaName");
+				cinemaModel.setName(name);
+				String id=jsonObject.getString("cinemaId");
+				cinemaModel.setId(id);
+				String address=jsonObject.getString("address");
+				cinemaModel.setAddress(address);
+				cinemaListModel.getCinemaModels().add(cinemaModel);
+			}
+			return cinemaListModel;
+		}else{
+			System.out.println("error_code:"+code+",reason:"+object.getString("reason"));
+			return null;
+		}
+	}
 
 	
 

@@ -33,8 +33,8 @@ public class Activity{
 	
 	private long launchUserId;
 	private Timestamp launchTime;
-	private float launchLat;
-	private float launchlog;
+	private double launchLat;
+	private double launchlog;
 
 	
 	private long partnerUserId; 
@@ -130,18 +130,18 @@ public class Activity{
 	}
 	
 	@Column(name = "launch_lat")
-	public float getLaunchLat() {
+	public double getLaunchLat() {
 		return launchLat;
 	}
-	public void setLaunchLat(float launchLat) {
+	public void setLaunchLat(double launchLat) {
 		this.launchLat = launchLat;
 	}
 	
 	@Column(name = "launch_log")
-	public float getLaunchlog() {
+	public double getLaunchlog() {
 		return launchlog;
 	}
-	public void setLaunchlog(float launchlog) {
+	public void setLaunchlog(double launchlog) {
 		this.launchlog = launchlog;
 	}
 	

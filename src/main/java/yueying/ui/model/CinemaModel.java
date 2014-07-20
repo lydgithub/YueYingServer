@@ -5,8 +5,9 @@ public class CinemaModel {
 	private String id;
 	private String name;
 	private String address;
-	private float latitude;
-	private float logitude;
+	private double latitude;
+	private double logitude;
+	private String distance;
 	
 	public String getId() {
 		return id;
@@ -29,18 +30,24 @@ public class CinemaModel {
 		this.address = address;
 	}
 	
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(float latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	
-	public float getLogitude() {
+	public double getLogitude() {
 		return logitude;
 	}
-	public void setLogitude(float logitude) {
+	public void setLogitude(double logitude) {
 		this.logitude = logitude;
+	}
+	public String getDistance() {
+		return distance;
+	}
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
 
 }

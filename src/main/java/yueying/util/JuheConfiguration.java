@@ -13,8 +13,8 @@ public class JuheConfiguration {
 	public static final String KEY = "key";
 	public static final String SHOW_FILM_URL = "show_film_url";
 	public static final String QUERY_MOVIE_URL = "query_movie_url";
-	public static final String WORKSPACE_HDFS = "workspace_hdfs";
-	public static final String MIDDLE_DATA_HDFS = "middle_data_hdfs";
+	public static final String SHOW_CINEMA_BY_FILM_URL = "show_cinema_by_film_url";
+	public static final String SHOW_CINEMA_BY_LOCATION_URL = "show_cinema_by_location_url";
 	
 	public static final String FS_DEFAULT_NAME = "fs.default.name";
 	
