@@ -70,6 +70,7 @@ public class NearbyActivityHelper {
 			
 			//获得当前活动报名人数和收藏人数
 			long activityId = activity.getId();
+			
 			ArrayList applyCountList = (ArrayList)getNearbyActivityService().getCount(activityId, 1);
 			int applyCount = 0;
 			Iterator iterator2 = applyCountList.iterator();
@@ -77,20 +78,21 @@ public class NearbyActivityHelper {
 				Long object =(Long)iterator2.next();
 				applyCount = object.intValue(); 
 			}
+			System.out.println("applycount:" + applyCount);
+			activityInfoModel.setApplyCount(applyCount);
 			
-			System.out.println(UUID.randomUUID().toString() );
-			
-			
-			System.out.println(applyCount);
-		
-			/*
-			Object collectCountObject = o[4];
-			
-			*/
-			//System.out.println("applycount:" + applyCountObject);
+			ArrayList collectCountList = (ArrayList)getNearbyActivityService().getCount(activityId, 2);
+			int collectCount = 0;
+			Iterator iterator3 = collectCountList.iterator();
+			while(iterator3.hasNext()){
+				Long object =(Long)iterator3.next();
+				collectCount = object.intValue(); 
+			}
+			System.out.println("collectcount:" + collectCount);
+			activityInfoModel.setCollectCount(collectCount);
 			
 			activityInfoModel.setId(activity.getId());
-			System.out.println(activity.getId());
+			//System.out.println(activity.getId());
 			activityInfoModel.setPartnerGentle(activity.getGentle());
 			activityInfoModel.setStyle(activity.getStyle());
 			activityInfoModel.setExpectation(activity.getExpectation());

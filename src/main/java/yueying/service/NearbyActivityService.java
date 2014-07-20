@@ -80,7 +80,7 @@ public class NearbyActivityService {
 					+ "where act.launchUserId = u.id and act.cinemaId = c.id ";
 					*/
 			Query query = session.createQuery(hql);
-			//query.setString("id", activityId.toString());
+			query.setString("id", new Long(activityId).toString());
 			query.setString("status", new Integer(flag).toString());
 			
 			list = query.list();
