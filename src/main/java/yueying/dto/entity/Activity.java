@@ -40,7 +40,8 @@ public class Activity{
 	private long partnerUserId; 
 	
 	@Id
-	@Column(name = "id", length = 128)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	public long getId() {
 		return id;
 	}
